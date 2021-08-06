@@ -16,6 +16,8 @@ namespace Concepts.Core.Builders
     {
         private string _host;
         private string _databaseName;
+        private DatabaseEngine _databaseEngine = DatabaseEngine.InnoDB;
+        private string _databaseVersion = "~5.0";
         private readonly DatabaseUser _user = new DatabaseUser();
 
         private DatabaseConnectionBuilder()
@@ -45,9 +47,21 @@ namespace Concepts.Core.Builders
             return this;
         }
 
+        public IConnectionInitializerStage SetDatabaseEngine(DatabaseEngine engine)
+        {
+            _databaseEngine = engine;
+            return this;
+        }
+
+        public IConnectionInitializerStage SetDatabaseVersion(string versionCode)
+        {
+            _databaseVersion = versionCode;
+            return this;
+        }
+
         public DatabaseConnection Connect()
         {
-            return new DatabaseConnection(_host, _databaseName, _user.Username, _user.Password);
+            return new DatabaseConnection(_host, _databaseName, _user.Username, _user.Password,_databaseEngine,_databaseVersion);
         }
     }
 
@@ -68,23 +82,52 @@ namespace Concepts.Core.Builders
 
     public interface IConnectionInitializerStage
     {
+        public IConnectionInitializerStage SetDatabaseEngine(DatabaseEngine engine);
+        public IConnectionInitializerStage SetDatabaseVersion(string versionCode);
         public DatabaseConnection Connect();
     }
 
 
+    public enum DatabaseEngine
+    {
+        MariaDB,
+        InnoDB
+    }
+
     public class DatabaseConnection
     {
-        public string Host { get; private set; }
-        public string Database { get; private set; }
-        public string Username { get; private set; }
-        public string Password { get; private set; }
+        public string Host { get; }
+        public string Database { get; }
+        public string DatabaseVersion { get; }
+        public DatabaseEngine DatabaseEngine { get; }
+        public string Username { get; }
+        public string Password { get; }
 
-        public DatabaseConnection(string host, string database, string username, string password)
+        public DatabaseConnection(string host, string database, string username, string password,
+            DatabaseEngine databaseEngine, string databaseVersion)
         {
             Host = host;
             Database = database;
             Username = username;
             Password = password;
+            DatabaseEngine = databaseEngine;
+            DatabaseVersion = databaseVersion;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DatabaseConnection other &&
+                   Host == other.Host &&
+                   Database == other.Database &&
+                   Username == other.Username &&
+                   Password == other.Password &&
+                   DatabaseEngine == other.DatabaseEngine &&
+                   DatabaseVersion == other.DatabaseVersion;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Host, Database,DatabaseVersion,DatabaseEngine,Username,Password);
         }
     }
 
