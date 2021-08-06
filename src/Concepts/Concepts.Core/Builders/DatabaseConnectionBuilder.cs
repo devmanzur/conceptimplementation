@@ -18,7 +18,7 @@ namespace Concepts.Core.Builders
         private string _databaseName;
         private DatabaseEngine _databaseEngine = DatabaseEngine.InnoDB;
         private string _databaseVersion = "~5.0";
-        private readonly DatabaseUser _user = new DatabaseUser();
+        private DatabaseUser _user;
 
         private DatabaseConnectionBuilder()
         {
@@ -43,7 +43,9 @@ namespace Concepts.Core.Builders
 
         public IConnectionInitializerStage WithCredential(Action<DatabaseUser> credentialSetup)
         {
-            credentialSetup(_user);
+            _user = new DatabaseUser();
+            //invoke is conditional since user may not pass any function;
+            credentialSetup?.Invoke(_user);
             return this;
         }
 
