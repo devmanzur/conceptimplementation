@@ -2,7 +2,7 @@ using Concepts.Core.Builders;
 using FluentAssertions;
 using Xunit;
 
-namespace Concepts.Core.UnitTests
+namespace Concepts.Core.UnitTests.Builders
 {
     public partial class DatabaseConnectionBuilderTests
     {

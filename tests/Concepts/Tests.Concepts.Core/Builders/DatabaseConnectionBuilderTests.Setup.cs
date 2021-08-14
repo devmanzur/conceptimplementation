@@ -1,6 +1,6 @@
 using Concepts.Core.Builders;
 
-namespace Concepts.Core.UnitTests
+namespace Concepts.Core.UnitTests.Builders
 {
     public partial class DatabaseConnectionBuilderTests
     {
