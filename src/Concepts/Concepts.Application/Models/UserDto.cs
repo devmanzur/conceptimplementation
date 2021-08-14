@@ -1,4 +1,5 @@
 using Concepts.Core.Models;
+using Concepts.Core.Utils;
 
 namespace Concepts.Application.Models
 {
@@ -11,20 +12,10 @@ namespace Concepts.Application.Models
 
         public UserDto(User user)
         {
+            Id = IdHashUtil.Encode(user.Id);
             Name = user.Name;
             PhoneNumber = user.PhoneNumber;
             Wallet = new WalletDto(user.Wallet);
         }
-    }
-
-    public class WalletDto
-    {
-        public WalletDto(Wallet userWallet)
-        {
-            Balance = $"BDT {userWallet.Balance:F}";
-        }
-
-        public string Id { get; private set; }
-        public string Balance { get; private set; }
     }
 }

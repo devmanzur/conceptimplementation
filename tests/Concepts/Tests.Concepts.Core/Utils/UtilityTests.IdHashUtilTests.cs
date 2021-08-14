@@ -8,7 +8,7 @@ namespace Concepts.Core.UnitTests.Utils
     public partial class UtilityTests
     {
         [Fact]
-        public void ShouldReturnSameOutputAsInputWhenAValueIsEncodedAndDecoded()
+        public void ShouldReturnOriginalIdValueWhenIdIsEncodedAndDecodedBack()
         {
             //given
             long inputId = fixture.Create<long>();

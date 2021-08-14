@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DFCEB025
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Concepts", "Concepts", "{406B03D3-6BDE-45D1-982A-BE89C0206940}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concepts.Core.UnitTests", "tests\Concepts\Concepts.Core.UnitTests\Concepts.Core.UnitTests.csproj", "{58071E8B-243C-4429-92F3-E45EB84F9CB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Concepts.Core", "tests\Concepts\Tests.Concepts.Core\Tests.Concepts.Core.csproj", "{58071E8B-243C-4429-92F3-E45EB84F9CB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concepts.Application", "src\Concepts\Concepts.Application\Concepts.Application.csproj", "{72332640-7008-4EE0-B525-1291F1EA8A96}"
 EndProject

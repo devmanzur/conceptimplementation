@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Concepts.Application.Models;
@@ -22,9 +23,10 @@ namespace Concepts.Application.UseCases.GetUsers
             _userRepository = userRepository;
         }
         
-        public Task<List<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<List<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            var users = await _userRepository.GetUsers();
+            return users.Select(x => new UserDto(x)).ToList();
         }
     }
 }
